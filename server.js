@@ -34,7 +34,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/',function(request, response){
     response.sendFile(__dirname + '/public/index.html');
-    app.use(express.static(__dirname+'/node_modules/angular/angular.js'));
 });
 
 var server = app.listen(80,function(){
