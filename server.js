@@ -1,4 +1,4 @@
-# PARTYANDO
+/*
 
 The MIT License (MIT)
 
@@ -21,3 +21,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+*/
+
+'use strict';
+
+var express = require('express');
+var app = express();
+
+app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/public'));
+
+app.get('/',function(request, response){
+    response.sendFile(__dirname + '/public/index.html');
+    app.use(express.static(__dirname+'/node_modules/angular/angular.js'));
+});
+
+var server = app.listen(80,function(){
+    
+    var host = server.address().address;
+    var port = server.address().port;
+    
+    console.log("Listen at http://%s:%s",host,port);
+    
+});
