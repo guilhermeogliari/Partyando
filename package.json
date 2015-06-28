@@ -1,7 +1,7 @@
 {
     "name": "Partyando",
     "version": "0.0.1",
-    "description": "Aplicação sobre festas",
+    "description": "Application Partyando",
     "main": "node server.js",
     "author": "Guilherme Ogliari < guiiogliari@gmail.com >",
     "repository" : {
