@@ -1,17 +1,24 @@
 {
-    "name": "Partyando",
-    "version": "0.0.1",
-    "description": "Application Partyando",
-    "main": "node server.js",
-    "author": "Guilherme Ogliari < guiiogliari@gmail.com >",
-    "repository" : {
-        "type" : "git",
-        "url" : "https://github.com/guiogliari/Partyando"
-    },
-    "dependencies": {
-        "express" : "4.13.0",
-        "mongodb" : "2.0.35",
-        "angular-material" : "0.10.0"
-    },
-    "license" : "MIT"
+  "name": "Partyando",
+  "version": "0.0.1",
+  "description": "Application Partyando",
+  "main": "node server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Guilherme Ogliari < guiiogliari@gmail.com >",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guiogliari/Partyando"
+  },
+  "dependencies": {
+    "angular": "^1.4.1",
+    "angular-animate": "^1.4.1",
+    "angular-aria": "^1.4.1",
+    "angular-material": "^0.10.0",
+    "body-parser": "^1.13.1",
+    "express": "^4.13.0",
+    "mongoose": "^4.0.6"
+  },
+  "license": "MIT"
 }

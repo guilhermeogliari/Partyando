@@ -26,4 +26,14 @@ SOFTWARE.
 
 'use strict';
 
-angular.module('Partyando',['ngMaterial']);
+var Partyando = angular.module('Partyando',['PartyandoRouter','PartyandoControllers','ngMaterial']).run(run);
+
+Partyando
+.directive('homeRead',function(){
+    return {
+        restrict     : 'E',
+        templateUrl  : '/pages/home.html',
+        controller   : 'HomeController',
+        controllerAs : 'home'
+    }
+});

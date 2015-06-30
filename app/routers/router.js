@@ -26,5 +26,10 @@ SOFTWARE.
 
 'use strict';
 
-var PartyandoController = angular.controller('PartyandoControllers');
+var router = require('./users');
 
+router.get('/',function(req, res){
+    res.json({ message : "Bem-vindo a api" });
+});
+
+module.exports = router;

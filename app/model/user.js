@@ -26,5 +26,18 @@ SOFTWARE.
 
 'use strict';
 
-var PartyandoController = angular.controller('PartyandoControllers');
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
+var UserSchema = new Schema({
+    name: String,
+    lastName: String,
+    birth: Date,
+    email: String,
+    password: String,
+    typeUser: Number,
+    description: String,
+    
+});
+
+module.exports = mongoose.model('user', UserSchema);

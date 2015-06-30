@@ -26,5 +26,18 @@ SOFTWARE.
 
 'use strict';
 
-var PartyandoController = angular.controller('PartyandoControllers');
+var PartyandoRouter = angular.module('PartyandoRouter',['ngRoute']);
 
+PartyandoRouter.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
+
+    $routeProvider
+    .when('/home',{
+        templateUrl  : '/pages/home.html',
+        controller   : 'HomeController',
+        controllerAs : 'home'
+    })
+    .otherwise({
+        redirectTo: '/home'
+    });
+    
+}]);

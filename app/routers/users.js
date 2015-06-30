@@ -27,22 +27,56 @@ SOFTWARE.
 'use strict';
 
 var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+var router = express.Router();
+var User = require('../model/user');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+router.route('/users')
+    
+    .post(function(req, res){
+        
+        var user = new User(req.body);
+    
+        user.save(function(err){
+            if(err) res.send(err);
+            res.json({ message : 'User created' });
+        });
+    
+    })
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/partyando');
+    .get(function(req, res){
+        User.find(function(err, users){
+            if(err) res.send(err);
+            res.json(users);
+        });
+    });
 
-var router = require('./app/routers/router');
+router.route('/users/:user_id')
 
-app.use('/api', router);
+    .get(function(req, res) {
+		User.findById(req.params.user_id, function(err, user) {
+			if (err) res.send(err);
+			res.json(user);
+		});
+	})
 
-app.use(express.static(__dirname + '/'));
-app.use(express.static(__dirname + '/public'));
+    .put(function(req, res) {
+		User.findById(req.params.user_id, function(err, user) {
+			if (err) res.send(err);
+			user = req.body;
+			user.save(function(err) {
+				if (err) res.send(err);
+				res.json({ message: 'User updated!' });
+			});
+		});
+	})
 
-var server = app.listen(80);
+    .delete(function(req, res) {
+		User.remove({
+			_id: req.params.user_id
+		}, function(err, user) {
+			if (err) res.send(err);
+			res.json({ message: 'Successfully deleted' });
+		});
+    });
 
-module.exports = server;
+module.exports = router;

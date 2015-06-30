@@ -26,5 +26,20 @@ SOFTWARE.
 
 'use strict';
 
-var PartyandoController = angular.controller('PartyandoControllers');
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
+var CommentSchema = new Schema({
+    comment : String,
+    private : Boolean,
+    censored : Boolean,
+    dateTime : Date,
+    iteration : {
+        _id : ObjectId,
+        liked : Boolean,
+        notification : Boolean,
+        rating : Number
+    }
+});
+
+module.exports = mongoose.model('comment', CommentSchema);
