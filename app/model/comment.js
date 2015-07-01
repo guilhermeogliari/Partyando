@@ -35,7 +35,7 @@ var CommentSchema = new Schema({
     censored : Boolean,
     dateTime : Date,
     iteration : {
-        _id : ObjectId,
+        _id : String,
         liked : Boolean,
         notification : Boolean,
         rating : Number

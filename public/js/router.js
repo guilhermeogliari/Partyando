@@ -36,8 +36,18 @@ PartyandoRouter.config(['$routeProvider','$locationProvider',function($routeProv
         controller   : 'HomeController',
         controllerAs : 'home'
     })
+    .when('/createUser',{
+        templateUrl  : '/pages/create/user.html',
+        controller   : 'UserController',
+        controllerAs : 'users'
+    })
+    .when('/readUser',{
+        templateUrl  : '/pages/read/user.html',
+        controller   : 'UserController',
+        controllerAs : 'users'
+    })
     .otherwise({
-        redirectTo: '/home'
+        redirectTo: ''
     });
     
 }]);

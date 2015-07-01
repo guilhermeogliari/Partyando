@@ -26,10 +26,41 @@ SOFTWARE.
 
 'use strict';
 
-var router = require('./users');
+var express = require('express');
+var router = express.Router();
+
+var UsersController = require('../controller/UsersController');
+var CommentController = require('../controller/CommentController');
 
 router.get('/',function(req, res){
     res.json({ message : "Bem-vindo a api" });
 });
+
+/**
+* Users
+**/
+
+router.route('/users')
+    .post(UsersController.create.bind(UsersController))
+    .get(UsersController.readAll.bind(UsersController));
+
+router.route('/users/:_id')
+    .get(UsersController.readOne.bind(UsersController))
+    .put(UsersController.update.bind(UsersController))
+    .delete(UsersController.delete.bind(UsersController));
+
+/**
+* Comments
+**/
+
+router.route('/comments')
+    .post(UsersController.create.bind(UsersController))
+    .get(UsersController.readAll.bind(UsersController));
+
+router.route('/comments/:_id')
+    .get(CommentController.readOne.bind(CommentController))
+    .put(CommentController.update.bind(CommentController))
+    .delete(CommentController.delete.bind(CommentController));
+
 
 module.exports = router;

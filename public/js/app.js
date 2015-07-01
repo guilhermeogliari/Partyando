@@ -26,7 +26,7 @@ SOFTWARE.
 
 'use strict';
 
-var Partyando = angular.module('Partyando',['PartyandoRouter','PartyandoControllers','ngMaterial']).run(run);
+var Partyando = angular.module('Partyando',['PartyandoRouter','PartyandoControllers','PartyandoFilters','ngMaterial','ngMessages','ngMdIcons']);
 
 Partyando
 .directive('homeRead',function(){
@@ -37,3 +37,16 @@ Partyando
         controllerAs : 'home'
     }
 });
+
+angular.module('fabSpeedDialBasicUsageDemo', ['ngMaterial'])
+    .controller('AppCtrl', function($scope) {
+      $scope.demo = {
+        topDirections: ['left', 'up'],
+        bottomDirections: ['down', 'right'],
+        isOpen: false,
+        availableModes: ['md-fling', 'md-scale'],
+        selectedMode: 'md-fling',
+        availableDirections: ['up', 'down', 'left', 'right'],
+        selectedDirection: 'up'
+      };
+    }); 

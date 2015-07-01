@@ -26,5 +26,58 @@ SOFTWARE.
 
 'use strict';
 
-var PartyandoController = angular.controller('PartyandoControllers');
+var PartyandoControllers = angular.module('PartyandoControllers',[]);
 
+PartyandoControllers.controller('UserController',['$scope','$http','$location','$mdDialog',function($scope, $http, $location,$mdDialog){
+
+    var user = this;
+    var host = '/api/users/';
+
+    user.createUser = function($user){
+        $http['post'](host,$user).success(function(data){
+            $location.url('/readUser');
+            user.listUser();
+        });
+    };
+
+    user.readUser = function(){
+        $http['get'](host).success(function(data){
+            user.query = data;
+        });
+    };
+
+    user.updateUser = function($user){
+        $http['put'](host+$user._id, $user).success(function(data){
+            user.readUser();  
+        });
+    };
+
+    user.deleteUser = function($user){
+        $http['delete'](host+$user._id).success(function(data){
+            user.readUser();
+        });
+    };
+
+    user.showAdvanced = function(ev,user) {
+        $mdDialog.show({
+            controller: 'UserController',
+            templateUrl: '../pages/update/user.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+        }).then(function(answer) {
+            $scope.alert = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.alert = 'You cancelled the dialog.';
+        });
+
+    };
+
+    user.closeDialog = function($mdDialog) {
+        $mdDialog.hide();
+    };
+    
+    
+
+    user.readUser();
+
+}]);

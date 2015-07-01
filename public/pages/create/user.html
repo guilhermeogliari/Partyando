@@ -1,0 +1,78 @@
+<!-- 
+/*
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Guilherme Ogliari Rodrigues
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+-->
+
+<div layout-lg="row" layout-gt-lg="row" layout-align="center center">
+    <md-whiteframe layout layout-padding class="md-whiteframe-z3" class="autoScroll" flex="90">
+        <md-content>
+            <form name="userForm" ng-submit="users.createUser(user)">
+                <h2 class="md-title">Cadastro de usuário</h2>
+                <div layout layout-sm="column">
+                    <md-input-container  flex>
+                        <label>Nome</label>
+                        <input ng-model="user.name" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Sobrenome</label>
+                        <input ng-model="user.lastName" required>
+                    </md-input-container>
+                    <md-select name="typeUser" placeholder="Tipo de usuário" ng-model="user.typeUser" required>
+                        <md-option value="1">Normal</md-option>
+                        <md-option value="2">Club</md-option>
+                        <md-option value="0">Admin</md-option>
+                    </md-select>
+                </div>
+                <div layout layout-sm="column">
+                    <md-input-container>
+                        <label>Data de nascimento</label>
+                        <input type="date" ng-model="user.birth" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <input type="email" ng-model="user.email" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Senha</label>
+                        <input type="password" ng-model="user.password" required>
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <label>Descrição (opcional) </label>
+                    <textarea ng-model="user.description"></textarea>
+                </md-input-container>
+                <div layout layout-sm="column" layout-align="end center">
+                    <md-button ng-disabled="userForm.$invalid" type="submit" class="md-fab md-primary" aria-label="Salvar">
+                        <ng-md-icon icon="save"></ng-md-icon>
+                    </md-button>
+                    <md-button ng-disabled="!user" ng-click="user = undefined" class="md-fab md-warn" aria-label="Limpar">
+                        <ng-md-icon icon="clear"></ng-md-icon>
+                    </md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-whiteframe>
+</div>

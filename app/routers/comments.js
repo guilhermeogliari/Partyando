@@ -26,52 +26,51 @@ SOFTWARE.
 
 'use strict';
 
-var express = require('express');
-var router = express.Router();
-var User = require('../model/user');
 
-router.route('/users')
+var Comment = require('../model/comment');
+
+router.route('/comments')
     
     .post(function(req, res){
         
-        var user = new User(req.body);
+        var comment = new Comment(req.body);
     
-        user.save(function(err){
+        comment.save(function(err){
             if(err) res.send(err);
-            res.json({ message : 'User created' });
+            res.json({ message : 'Successfully created' });
         });
     
     })
 
     .get(function(req, res){
-        User.find(function(err, users){
+        Comment.find(function(err, users){
             if(err) res.send(err);
             res.json(users);
         });
     });
 
-router.route('/users/:user_id')
+router.route('/comments/:_id')
 
     .get(function(req, res) {
-		User.findById(req.params.user_id, function(err, user) {
+		Comment.findById(req.params._id, function(err, user) {
 			if (err) res.send(err);
 			res.json(user);
 		});
 	})
 
     .put(function(req, res) {
-		User.findById(req.params.user_id, function(err, user) {
+		Comment.findById(req.params.user_id, function(err, user) {
 			if (err) res.send(err);
-			user = req.body;
-			user.save(function(err) {
+			comment = req.body;
+			comment.save(function(err) {
 				if (err) res.send(err);
-				res.json({ message: 'User updated!' });
+				res.json({ message: 'Successfully updated!' });
 			});
 		});
 	})
 
     .delete(function(req, res) {
-		User.remove({
+		Comment.remove({
 			_id: req.params.user_id
 		}, function(err, user) {
 			if (err) res.send(err);
