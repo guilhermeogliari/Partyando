@@ -29,16 +29,30 @@ SOFTWARE.
 var express = require('express');
 var router = express.Router();
 
-var UsersController = require('../controller/UsersController');
-var CommentController = require('../controller/CommentController');
-
 router.get('/',function(req, res){
     res.json({ message : "Bem-vindo a api" });
 });
 
 /**
+* Comments
+**/
+
+var CommentsController = require('../controller/CommentsController');
+
+router.route('/comments')
+    .post(CommentsController.create.bind(CommentsController))
+    .get(CommentsController.readAll.bind(CommentsController));
+
+router.route('/comments/:_id')
+    .get(CommentsController.readOne.bind(CommentsController))
+    .put(CommentsController.update.bind(CommentsController))
+    .delete(CommentsController.delete.bind(CommentsController));
+
+/**
 * Users
 **/
+
+var UsersController = require('../controller/UsersController');
 
 router.route('/users')
     .post(UsersController.create.bind(UsersController))
@@ -48,19 +62,6 @@ router.route('/users/:_id')
     .get(UsersController.readOne.bind(UsersController))
     .put(UsersController.update.bind(UsersController))
     .delete(UsersController.delete.bind(UsersController));
-
-/**
-* Comments
-**/
-
-router.route('/comments')
-    .post(UsersController.create.bind(UsersController))
-    .get(UsersController.readAll.bind(UsersController));
-
-router.route('/comments/:_id')
-    .get(CommentController.readOne.bind(CommentController))
-    .put(CommentController.update.bind(CommentController))
-    .delete(CommentController.delete.bind(CommentController));
 
 
 module.exports = router;

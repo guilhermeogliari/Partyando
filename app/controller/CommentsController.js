@@ -26,56 +26,52 @@ SOFTWARE.
 
 'use strict';
 
-
 var Comment = require('../model/comment');
+var CommentsController = require('express');
 
-router.route('/comments')
-    
-    .post(function(req, res){
-        
-        var comment = new Comment(req.body);
-    
-        comment.save(function(err){
-            if(err) res.send(err);
-            res.json({ message : 'Successfully created' });
-        });
-    
-    })
+CommentsController.create = function(req, res){
 
-    .get(function(req, res){
-        Comment.find(function(err, users){
-            if(err) res.send(err);
-            res.json(users);
-        });
+    var comment = new Comment(req.body);
+
+    comment.save(function(err){
+        if(err) res.send(err);
+        res.json({ message : 'Comment created' });
     });
 
-router.route('/comments/:_id')
+};
 
-    .get(function(req, res) {
-		Comment.findById(req.params._id, function(err, user) {
-			if (err) res.send(err);
-			res.json(user);
-		});
-	})
-
-    .put(function(req, res) {
-		Comment.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);
-			comment = req.body;
-			comment.save(function(err) {
-				if (err) res.send(err);
-				res.json({ message: 'Successfully updated!' });
-			});
-		});
-	})
-
-    .delete(function(req, res) {
-		Comment.remove({
-			_id: req.params.user_id
-		}, function(err, user) {
-			if (err) res.send(err);
-			res.json({ message: 'Successfully deleted' });
-		});
+CommentsController.readAll = function(req, res){
+    Comment.find(function(err, comments){
+        if(err) res.send(err);
+        res.json(comments);
     });
+};
 
-module.exports = router;
+CommentsController.readOne = function(req, res) {
+    Comment.findById(req.params._id, function(err, comment) {
+        if (err) res.send(err);
+        res.json(comment);
+    });
+};
+
+CommentsController.update = function(req, res) {
+    Comment.findById(req.params._id, function(err, comment) {
+        if (err) res.send(err);
+        comment = req.body;
+        comment.save(function(err) {
+            if (err) res.send(err);
+            res.json({ message: 'Comment updated!' });
+        });
+    });
+};
+
+CommentsController.delete = function(req, res) {
+    Comment.remove({
+        _id: req.params._id
+    }, function(err, comment) {
+        if (err) res.send(err);
+        res.json({ message: 'Successfully deleted' });
+    });
+}
+
+module.exports = CommentsController;
