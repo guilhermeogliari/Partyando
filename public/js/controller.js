@@ -28,7 +28,7 @@ SOFTWARE.
 
 var PartyandoControllers = angular.module('PartyandoControllers',[]);
 
-PartyandoControllers.controller('UserController',['$scope','$http','$location','$mdDialog',function($scope, $http, $location,$mdDialog){
+PartyandoControllers.controller('UserController',['$scope','$http','$location',function($scope, $http, $location){
 
     var user = this;
     var host = '/api/users/';
@@ -57,26 +57,6 @@ PartyandoControllers.controller('UserController',['$scope','$http','$location','
             user.readUser();
         });
     };
-
-    user.showAdvanced = function(ev,user) {
-        $mdDialog.show({
-            controller: 'UserController',
-            templateUrl: '../pages/update/user.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-        }).then(function(answer) {
-            $scope.alert = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.alert = 'You cancelled the dialog.';
-        });
-
-    };
-
-    user.closeDialog = function($mdDialog) {
-        $mdDialog.hide();
-    };
-    
-    
 
     user.readUser();
 
